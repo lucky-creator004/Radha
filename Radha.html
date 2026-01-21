@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>राधा</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+    height:100vh;
+    background:#0b0b0b;
+    font-family:system-ui, Arial;
+    overflow:hidden;
+}
+
+/* ---------- BACKGROUND ---------- */
+.bg-layer{
+    position:fixed;
+    inset:0;
+    z-index:1;
+}
+
+.snake{
+    position:absolute;
+    width:10px;
+    height:10px;
+    background:#ff9f00;
+    border-radius:50%;
+    box-shadow:0 0 10px orange;
+    opacity:0.6;
+    animation: move 14s linear infinite;
+}
+
+@keyframes move{
+    0%{transform:translate(-20px,20vh)}
+    25%{transform:translate(100vw,30vh)}
+    50%{transform:translate(70vw,90vh)}
+    75%{transform:translate(10vw,70vh)}
+    100%{transform:translate(-20px,20vh)}
+}
+
+/* ---------- UI ---------- */
+.ui-layer{
+    position:fixed;
+    inset:0;
+    z-index:10;
+    color:#ffb000;
+}
+
+/* Mantra + count above button */
+.center-info{
+    position:fixed;
+    top:calc(50% - 200px);
+    left:55%;
+    transform:translateX(-50%);
+    text-align:center;
+}
+
+.center-title{
+    font-size:40px;
+    font-weight:800;
+    white-space:nowrap;
+    text-shadow:0 0 10px orange, 0 0 25px orange;
+}
+
+.center-count{
+    margin-top:8px;
+    font-size:16px;
+}
+
+/* TAP button */
+#tapBtn{
+    position:fixed;
+    top:50%;
+    left:55%;
+    transform:translate(-50%,-50%);
+    width:180px;
+    height:180px;
+    border:none;
+    border-radius:24px;
+    background:#ffb000;
+    color:white;
+    font-size:42px;
+    font-weight:700;
+    box-shadow:0 0 25px rgba(255,176,0,.9), 0 0 70px rgba(255,176,0,.6);
+}
+
+/* Bottom mantra list */
+#mantraBox{
+    position:fixed;
+    bottom:0;
+    width:100%;
+    max-height:220px;
+    overflow-y:auto;
+    border-top:2px solid orange;
+    padding:10px 0;
+    background:#050505;
+    text-align:center;
+}
+
+.mantra-line{
+    font-size:18px;
+    margin:6px 0;
+}
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND -->
+<div class="bg-layer">
+    <div class="snake"></div>
+    <div class="snake" style="animation-delay:3s"></div>
+    <div class="snake" style="animation-delay:6s"></div>
+    <div class="snake" style="animation-delay:9s"></div>
+</div>
+
+<!-- UI -->
+<div class="ui-layer">
+
+    <div class="center-info">
+        <div class="center-title">🕉 राधा 🕉</div>
+        <div class="center-count" id="counter">गिनती: 0 / 1000000</div>
+    </div>
+
+    <button id="tapBtn" onclick="tapChant()">TAP</button>
+
+    <div id="mantraBox"></div>
+
+</div>
+
+<script>
+let count = 0;
+const max = 1000000;
+
+const counter = document.getElementById("counter");
+const mantraBox = document.getElementById("mantraBox");
+
+function tapChant(){
+    if(count >= max) return;
+
+    count++;
+    counter.textContent = `गिनती: ${count} / ${max}`;
+
+    const line = document.createElement("div");
+    line.className = "mantra-line";
+    line.innerHTML = "🕉 राधा 🕉";
+
+    mantraBox.appendChild(line);
+    mantraBox.scrollTop = mantraBox.scrollHeight;
+}
+</script>
+
+</body>
+</html>
